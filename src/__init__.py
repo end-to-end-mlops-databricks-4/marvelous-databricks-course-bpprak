@@ -1,1 +1,1 @@
-"""Fixtures module."""
+"""my_project package."""

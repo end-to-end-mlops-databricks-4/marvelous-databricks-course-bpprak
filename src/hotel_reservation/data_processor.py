@@ -1,9 +1,5 @@
 """Data preprocessing module."""
 
-import datetime
-import time
-from typing import Tuple
-
 import numpy as np
 import pandas as pd
 from pyspark.sql import SparkSession
@@ -89,7 +85,7 @@ class DataProcessor:
         keep = [c for c in wanted if c in self.df.columns]
         self.df = self.df[keep].copy()
 
-    def split_data(self, test_size: float = 0.2, random_state: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def split_data(self, test_size: float = 0.2, random_state: int = 42) -> tuple[pd.DataFrame, pd.DataFrame]:
         """Split the DataFrame (self.df) into training and test sets.
 
         :param test_size: The proportion of the dataset to include in the test split.

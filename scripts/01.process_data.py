@@ -1,10 +1,10 @@
 import yaml
 from loguru import logger
+from marvelous.common import create_parser
 from pyspark.sql import SparkSession
 
 from hotel_reservation.config import ProjectConfig
 from hotel_reservation.data_processor import DataProcessor, generate_synthetic_data, generate_test_data
-from marvelous.common import create_parser
 
 args = create_parser()
 
@@ -23,7 +23,7 @@ df = spark.read.csv(
     f"/Volumes/{config.catalog_name}/{config.schema_name}/data/data.csv", header=True, inferSchema=True
 ).toPandas()
 
-if is_test==0:
+if is_test == 0:
     # Generate synthetic data.
     # This is mimicking a new data arrival. In real world, this would be a new batch of data.
     # df is passed to infer schema

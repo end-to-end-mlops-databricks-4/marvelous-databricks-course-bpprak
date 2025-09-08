@@ -1,6 +1,7 @@
 """Dataloader fixture."""
 
 from pathlib import Path
+
 import pandas as pd
 import pytest
 from loguru import logger
@@ -59,8 +60,7 @@ def sample_data(config: ProjectConfig, spark_session: SparkSession) -> pd.DataFr
     csv_path: Path | None = next((p for p in candidates if p.exists()), None)
     if csv_path is None:
         raise FileNotFoundError(
-            "Hotel sample CSV not found. Expected one of: "
-            + ", ".join(p.as_posix() for p in candidates)
+            "Hotel sample CSV not found. Expected one of: " + ", ".join(p.as_posix() for p in candidates)
         )
 
     logger.info(f"Loading hotel sample CSV: {csv_path.as_posix()}")

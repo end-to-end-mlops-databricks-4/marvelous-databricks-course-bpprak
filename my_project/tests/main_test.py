@@ -1,4 +1,4 @@
-from my_project.main import get_taxis, get_spark
+from my_project.main import get_spark, get_taxis
 
 
 def test_main():

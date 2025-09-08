@@ -8,11 +8,11 @@
 # sys.path.append(str(Path.cwd().parent / 'src'))
 
 # COMMAND ----------
-from loguru import logger
-import yaml
-import sys
-from pyspark.sql import SparkSession
+
 import pandas as pd
+import yaml
+from loguru import logger
+from pyspark.sql import SparkSession
 
 # Use your existing package/modules
 from hotel_reservation.config import ProjectConfig
@@ -28,21 +28,16 @@ logger.info(yaml.dump(config, default_flow_style=False))
 # Load the Hotel Reservations dataset
 spark = SparkSession.builder.getOrCreate()
 
-filepath = "../data/data.csv"   # point to your Kaggle CSV (rename/move as needed)
+filepath = "../data/data.csv"  # point to your Kaggle CSV (rename/move as needed)
 
 # Load the data
 df = pd.read_csv(filepath)
 
+
 # ---- Minimal header normalization & Id handling (keeps your modules unchanged) ----
 def _normalize(col: str) -> str:
-    return (
-        col.strip()
-           .replace(" ", "_")
-           .replace("-", "_")
-           .replace("/", "_")
-           .replace(".", "_")
-           .lower()
-    )
+    return col.strip().replace(" ", "_").replace("-", "_").replace("/", "_").replace(".", "_").lower()
+
 
 df.columns = [_normalize(c) for c in df.columns]
 

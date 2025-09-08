@@ -2,13 +2,12 @@
 
 import pandas as pd
 import pytest
-from tests.conftest import CATALOG_DIR
-
 from pyspark.sql import SparkSession
 
 # FIX: correct import package name
 from hotel_reservation.config import ProjectConfig
 from hotel_reservation.data_processor import DataProcessor
+from tests.conftest import CATALOG_DIR
 
 
 def test_data_ingestion(sample_data: pd.DataFrame) -> None:
@@ -30,11 +29,8 @@ def test_dataprocessor_init(
     assert isinstance(processor.spark, SparkSession)
 
 
-def test_column_transformations(
-    sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession
-) -> None:
-    """
-    Hotel dataset version:
+def test_column_transformations(sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession) -> None:
+    """Hotel dataset version:
     - categoricals → string/category dtype
     - numericals → numeric dtype
     (No house-price specific columns like LotFrontage, MasVnrType, GarageYrBlt.)
@@ -54,9 +50,7 @@ def test_column_transformations(
             assert str(df[n].dtype).startswith(("float", "int"))
 
 
-def test_missing_value_handling(
-    sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession
-) -> None:
+def test_missing_value_handling(sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession) -> None:
     """Numeric columns should have NAs imputed (median fill)."""
     processor = DataProcessor(pandas_df=sample_data, config=config, spark=spark_session)
     processor.preprocess()
@@ -67,9 +61,7 @@ def test_missing_value_handling(
             assert df[n].isna().sum() == 0
 
 
-def test_column_selection(
-    sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession
-) -> None:
+def test_column_selection(sample_data: pd.DataFrame, config: ProjectConfig, spark_session: SparkSession) -> None:
     """Processed DataFrame should contain exactly cat + num + target + Id."""
     processor = DataProcessor(pandas_df=sample_data, config=config, spark=spark_session)
     processor.preprocess()
@@ -98,8 +90,7 @@ def test_split_data_default_params(
 
 
 def test_preprocess_empty_dataframe(config: ProjectConfig, spark_session: SparkSession) -> None:
-    """
-    With an empty DataFrame (no columns), selecting required columns should raise KeyError.
+    """With an empty DataFrame (no columns), selecting required columns should raise KeyError.
     This matches behavior when required columns (e.g., target) are absent.
     """
     processor = DataProcessor(pandas_df=pd.DataFrame([]), config=config, spark=spark_session)
