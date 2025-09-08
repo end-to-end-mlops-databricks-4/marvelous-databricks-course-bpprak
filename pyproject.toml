@@ -33,6 +33,11 @@ test = ["pre-commit>=4.1.0, <5",
        "pydantic-settings>=2.0.0"
        ]
 
+ci = ["pytest>=8.0.0, <9",
+      "pytest-cov>=5.0.0, <6",
+      "pyspark>=3.4.0, <4",
+      "pre-commit>=4.1.0, <5"]
+
 [build-system]
 requires = [
   "setuptools>=72.0"]
@@ -41,7 +46,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where =["src"]
-include = ["hotel_reservations*"]
+include = ["hotel_reservation*"]
 
 
 [tool.setuptools.dynamic]
