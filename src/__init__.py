@@ -1,1 +1,1 @@
-"""my_project package."""
+"""hotel_reservation package."""
