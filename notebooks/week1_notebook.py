@@ -29,7 +29,7 @@ filepath = "../data/data.csv"
 df = pd.read_csv(filepath)
 
 # COMMAND ----------
-# Pipeline using DataProcessor 
+# Pipeline using DataProcessor
 processor = DataProcessor(df, config, spark)
 processor.preprocess()
 X_train, X_test = processor.split_data()
@@ -41,9 +41,8 @@ logger.info("Saving data to catalog")
 processor.save_to_catalog(X_train, X_test)
 
 # Enable change data feed (only once!)
-#logger.info("Enable change data feed")
-#processor.enable_change_data_feed()
-
+# logger.info("Enable change data feed")
+# processor.enable_change_data_feed()
 
 
 # COMMAND ----------
