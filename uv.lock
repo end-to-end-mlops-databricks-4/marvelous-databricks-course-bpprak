@@ -897,6 +897,8 @@ dev = [
     { name = "ipykernel" },
     { name = "pip" },
     { name = "pre-commit" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
 ]
 test = [
     { name = "pre-commit" },
@@ -935,8 +937,10 @@ requires-dist = [
     { name = "pyspark", marker = "extra == 'ci'", specifier = ">=3.4.0,<4" },
     { name = "pyspark", marker = "extra == 'test'", specifier = ">=3.4.0,<4" },
     { name = "pytest", marker = "extra == 'ci'", specifier = ">=8.0.0,<9" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0.0,<9" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8.0.0,<9" },
     { name = "pytest-cov", marker = "extra == 'ci'", specifier = ">=5.0.0,<6" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0,<6" },
     { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=5.0.0,<6" },
     { name = "python-dotenv", specifier = "==1.1.1" },
     { name = "scikit-learn", specifier = "==1.7.0" },
